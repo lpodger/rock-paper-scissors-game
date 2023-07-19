@@ -8,39 +8,33 @@ function getComputerChoice() {
 //Play a round
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    return "Player 1 wins!";
+    return "You win! Rock beats Scissors";
   }
   if (playerSelection === "rock" && computerSelection === "paper") {
-    return "Player 2 wins!";
-  }
-  if (playerSelection === "rock" && computerSelection === "rock") {
-    return "Draw!";
+    return "You lose! Paper beats Rock";
   }
   if (playerSelection === "paper" && computerSelection === "scissors") {
-    return "Player 2 wins!";
-  }
-  if (playerSelection === "paper" && computerSelection === "paper") {
-    return "Draw!";
+    return "You lose! Scissors beats Paper";
   }
   if (playerSelection === "paper" && computerSelection === "rock") {
-    return "Player 1 wins!";
-  }
-  if (playerSelection === "scissors" && computerSelection === "scissors") {
-    return "Draw!";
+    return "You win! Paper beats Rock";
   }
   if (playerSelection === "scissors" && computerSelection === "paper") {
-    return "Player 1 wins!";
+    return "You win! Scissors beats Paper";
   }
   if (playerSelection === "scissors" && computerSelection === "rock") {
-    return "Player 2 wins!";
+    return "You lose! Rock beats Scissors";
   }
-  
-
-  //determine winner
-  //return strin g that says "You Lose! Paper beats Rock"
+  if (playerSelection === computerSelection) {
+    return "Draw! You are both losers in my eyes.";
+  }
 }
 
-const playerSelection = "rock";
+//determine winner
+const playerSelection = window.prompt("Choose your weapon");
+if (playerSelection !== "scissors" || "rock" || "paper") {
+    return "You must enter scissors, paper or rock.";
+}
+
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
-
