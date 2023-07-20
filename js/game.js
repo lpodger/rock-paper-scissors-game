@@ -31,10 +31,22 @@ function playRound(playerSelection, computerSelection) {
 }
 
 //determine winner
-const playerSelection = window.prompt("Choose your weapon");
-if (playerSelection !== "scissors" || "rock" || "paper") {
-    return "You must enter scissors, paper or rock.";
+function playerSelectionHandler () {
+  const playerSelection = window.prompt("Choose your weapon").toLowerCase();
+if (playerSelection !== "scissors" && playerSelection !== "rock" && playerSelection !== "paper") {
+    alert("You must enter Scissors, Paper or Rock.");
 }
+};
+
 
 const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+console.log(game(playerSelection, computerSelection));
+
+function game() {
+  for (let i = 0; i === 4; i++) {
+    playRound()
+  }
+}
+  //loop 5 times
+  //keep score
+  //report winner
