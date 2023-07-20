@@ -70,7 +70,7 @@ function game() {
   if (playerWins > computerWins) {
     alert("You are a winner!");
   } else if (playerWins < computerWins) {
-    alert("Your are a loser!");
+    alert("You are a loser!");
   } else {
     alert("You are both losers in my eyes.");
   }
