@@ -30,23 +30,49 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-//determine winner
-function playerSelectionHandler () {
+//Get player weapon choice
+function playerSelectionHandler() {
   const playerSelection = window.prompt("Choose your weapon").toLowerCase();
-if (playerSelection !== "scissors" && playerSelection !== "rock" && playerSelection !== "paper") {
+  if (
+    playerSelection !== "scissors" &&
+    playerSelection !== "rock" &&
+    playerSelection !== "paper"
+  ) {
     alert("You must enter Scissors, Paper or Rock.");
+    return playerSelectionHandler();
+  }
+  return playerSelection;
 }
-};
 
-
-const computerSelection = getComputerChoice();
-console.log(game(playerSelection, computerSelection));
-
+//Run the game
 function game() {
-  for (let i = 0; i === 4; i++) {
-    playRound()
+  const results = [];
+
+  let playerWins = 0;
+  let computerWins = 0;
+  for (let i = 0; i < 5; i++) {
+    const playerSelection = playerSelectionHandler();
+    const computerSelection = getComputerChoice();
+    let outcome = playRound(playerSelection, computerSelection);
+    results.push(outcome);
+
+    if (outcome.includes("win")) {
+      playerWins++;
+    } else if (outcome.includes("lose")) {
+      computerWins++;
+    }
+  }
+
+  for (const result of results) {
+    console.log(result);
+  }
+
+  if (playerWins > computerWins) {
+    alert("You are a winner!");
+  } else if (playerWins < computerWins) {
+    alert("Your are a loser!");
+  } else {
+    alert("You are both losers in my eyes.");
   }
 }
-  //loop 5 times
-  //keep score
-  //report winner
+console.log(game());
