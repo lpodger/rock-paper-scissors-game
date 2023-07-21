@@ -50,7 +50,7 @@ function game() {
 
   let playerWins = 0;
   let computerWins = 0;
-  for (let i = 0; i < 5; i++) {
+  // for (let i = 0; i < 5; i++) {
     const playerSelection = playerSelectionHandler();
     const computerSelection = getComputerChoice();
     let outcome = playRound(playerSelection, computerSelection);
