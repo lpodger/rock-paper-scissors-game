@@ -1,3 +1,5 @@
+const results = [];
+
 //Get computer choice
 function getComputerChoice() {
   let computerChoice = ["rock", "paper", "scissors"];
@@ -31,48 +33,55 @@ function playRound(playerSelection, computerSelection) {
 }
 
 //Get player weapon choice
-function playerSelectionHandler() {
-  const playerSelection = window.prompt("Choose your weapon").toLowerCase();
-  if (
-    playerSelection !== "scissors" &&
-    playerSelection !== "rock" &&
-    playerSelection !== "paper"
-  ) {
-    alert("You must enter Scissors, Paper or Rock.");
-    return playerSelectionHandler();
-  }
+function playerSelectionHandler(event) {
+  const clickedBtn = event.target;
+  const playerSelection = clickedBtn.value;
   return playerSelection;
 }
 
-//Run the game
-function game() {
-  const results = [];
+function btnClickHandler(event) {
+  const playerSelection = playerSelectionHandler(event);
+  const computerSelection = getComputerChoice();
+  const outcome = playRound(playerSelection, computerSelection);
+  results.push(outcome);
+  showResult(outcome);
 
-  let playerWins = 0;
-  let computerWins = 0;
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = playerSelectionHandler();
-    const computerSelection = getComputerChoice();
-    let outcome = playRound(playerSelection, computerSelection);
-    results.push(outcome);
+  checkGameEnd();
+}
 
-    if (outcome.includes("win")) {
-      playerWins++;
-    } else if (outcome.includes("lose")) {
-      computerWins++;
+// Function to check if the game has ended after 5 rounds
+function checkGameEnd() {
+  if (results.length === 5) {
+    let playerWins = results.filter((result) => result.includes("win")).length;
+    let computerWins = results.filter((result) =>
+      result.includes("lose")
+    ).length;
+    if (playerWins > computerWins) {
+      showResult("You are a winner!");
+    } else if (playerWins < computerWins) {
+      showResult("You are a loser!");
+    } else {
+      showResult("You are both losers in my eyes.");
     }
-  }
 
-  for (const result of results) {
-    console.log(result);
-  }
-
-  if (playerWins > computerWins) {
-    alert("You are a winner!");
-  } else if (playerWins < computerWins) {
-    alert("You are a loser!");
-  } else {
-    alert("You are both losers in my eyes.");
+    // Reset the results array for the next game
+    results.length = 0;
   }
 }
-console.log(game());
+
+// Add scoreboard to the global scope
+const resultsContainer = document.querySelector(".results");
+
+function showResult(message) {
+  const resultsParagraph = document.createElement("p");
+  resultsParagraph.textContent = message;
+  resultsContainer.appendChild(resultsParagraph);
+}
+
+//Add event listener to btns
+const btns = document.getElementsByClassName("btn");
+const btnsArray = Array.from(btns);
+btnsArray.forEach((button) => {
+  button.addEventListener("click", btnClickHandler);
+});
+
