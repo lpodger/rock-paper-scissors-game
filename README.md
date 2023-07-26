@@ -9,6 +9,8 @@ Functions were created to generate the computer's choice using math.random and t
 A function with a series of if statements was used to set the conditions for winning and losing.
 Finally all of these functions were put inside a game function which tallied the results and plays the game five times at which point a winner is declared.
 
+This project was updated further and some of the code refactored to include a UI that allows players to click buttons to choose their weapon and the outcome displayed.
+
 Technologies used
 
 HTML, JavaScript
